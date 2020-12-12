@@ -21,7 +21,7 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.roy.Expenses_Management_System.Models.RegesterUser;
+//import com.roy.Expenses_Management_System.Models.RegesterUser;
 import com.roy.Expenses_Management_System.R;
 
 import java.util.Properties;
@@ -38,7 +38,7 @@ import javax.mail.internet.MimeMessage;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
-public class Registration_FormActivity extends AppCompatActivity {
+public class GroupRegistration_FormActivity extends AppCompatActivity {
 
     private EditText userName,mobileNo,email,confirmMail;
     private Button usrRegbtn;
@@ -59,7 +59,7 @@ public class Registration_FormActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_registration__form);
+        setContentView(R.layout.activity_group_registration__form);
 
 
         userName = findViewById(R.id.rg_user_name);
@@ -75,7 +75,6 @@ public class Registration_FormActivity extends AppCompatActivity {
 
         final Intent intent = getIntent();
         final String group_key = intent.getExtras().getString("Group_key");
-        final String group_size = intent.getExtras().getString("Group_size");
         final String group_name = intent.getExtras().getString("Group_Name");
 
 
@@ -95,9 +94,7 @@ public class Registration_FormActivity extends AppCompatActivity {
                     final String mobile_no = mobileNo.getText().toString().trim();
                     final String mail = email.getText().toString().trim();
                     final String confirm_mail = confirmMail.getText().toString().trim();
-                    final int group_size_int = Integer.parseInt(group_size);
                     final String password = "ems@12345".trim();
-                    n=group_size_int;
                     catchMail = mail;
 
 
@@ -111,8 +108,8 @@ public class Registration_FormActivity extends AppCompatActivity {
 
                                     if(task.isSuccessful())
                                     {
-                                        RegesterUser regesterUser = new RegesterUser(user_name, mobile_no, group_key,group_name);
-                                        addUser(regesterUser);
+//                                        RegesterUser regesterUser = new RegesterUser(user_name, mobile_no, group_key,group_name);
+//                                        addUser(regesterUser);
 
                                     }
                                 }
@@ -142,40 +139,40 @@ public class Registration_FormActivity extends AppCompatActivity {
 
     }
 
-    private void addUser(RegesterUser regesterUser) {
-        ref = mDatabase.getReference("Users");
-        String key = mAuth.getCurrentUser().getUid();
-        regesterUser.setUser_key(key);
-        DatabaseReference current_user_ref = ref.child(key);
-
-
-        current_user_ref.setValue(regesterUser).addOnSuccessListener(new OnSuccessListener<Void>() {
-            @Override
-            public void onSuccess(Void aVoid) {
-
-                sendMailToUser(sEmail,sPassword,catchMail);
-                String count = String.valueOf(i);
-                String groupcount = String.valueOf(n);
-                Log.d("Registration"," outer Count : "+count +"Group Count "+groupcount);
-                if(groupcount.equals(count))
-                {
-                    Log.d("Registration","If Count : "+count +"Group Count "+groupcount);
-                    startActivity(new Intent(Registration_FormActivity.this, Login_pageActivity.class));
-                }
-                else
-                {
-
-                    Log.d("Registration"," else Count : "+count +"Group Count "+groupcount);
-
-                    showMessage("Member "+ i +" registered successfully");
-
-                    loadingProgressBar.setVisibility(View.INVISIBLE);
-                    usrRegbtn.setVisibility(View.VISIBLE);
-                    i++;
-                }
-            }
-        });
-    }
+//    private void addUser(RegesterUser regesterUser) {
+//        ref = mDatabase.getReference("Users");
+//        String key = mAuth.getCurrentUser().getUid();
+//        regesterUser.setUser_key(key);
+//        DatabaseReference current_user_ref = ref.child(key);
+//
+//
+//        current_user_ref.setValue(regesterUser).addOnSuccessListener(new OnSuccessListener<Void>() {
+//            @Override
+//            public void onSuccess(Void aVoid) {
+//
+//                sendMailToUser(sEmail,sPassword,catchMail);
+//                String count = String.valueOf(i);
+//                String groupcount = String.valueOf(n);
+//                Log.d("Registration"," outer Count : "+count +"Group Count "+groupcount);
+//                if(groupcount.equals(count))
+//                {
+//                    Log.d("Registration","If Count : "+count +"Group Count "+groupcount);
+//                    startActivity(new Intent(GroupRegistration_FormActivity.this, Login_pageActivity.class));
+//                }
+//                else
+//                {
+//
+//                    Log.d("Registration"," else Count : "+count +"Group Count "+groupcount);
+//
+//                    showMessage("Member "+ i +" registered successfully");
+//
+//                    loadingProgressBar.setVisibility(View.INVISIBLE);
+//                    usrRegbtn.setVisibility(View.VISIBLE);
+//                    i++;
+//                }
+//            }
+//        });
+//    }
 
     private void sendMailToUser(String sEmail, String sPassword, String catchMail) {
         final String senderMail = sEmail.trim();

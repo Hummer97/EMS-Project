@@ -12,6 +12,7 @@ import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.roy.Expenses_Management_System.Models.CreateGroup;
@@ -33,18 +34,22 @@ public class Create_GroupActivity extends AppCompatActivity{
     private Button regBtn;
     private FirebaseDatabase mDatabase;
     private DatabaseReference reference;
+    private FirebaseAuth mFirebaseAuth;
+    private String mCurrentUser;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create__group);
         rg_group_name = findViewById(R.id.rg_group_name);
-        rg_group_size = findViewById(R.id.rg_group_size);
         loadProgress = findViewById(R.id.rg_progressBar);
         regBtn = findViewById(R.id.rg_group_create_btn);
+
+        mFirebaseAuth = FirebaseAuth.getInstance();
         loadProgress.setVisibility(View.INVISIBLE);
 
         mDatabase = FirebaseDatabase.getInstance();
+        mCurrentUser = mFirebaseAuth.getCurrentUser().getUid();
 
         regBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -53,10 +58,9 @@ public class Create_GroupActivity extends AppCompatActivity{
                 loadProgress.setVisibility(View.VISIBLE);
 
                 final String group_name = rg_group_name.getText().toString().trim();
-                final String group_size = rg_group_size.getText().toString().trim();
                 //final int size_group = Integer.parseInt(group_size);    We use it later
 
-                if(group_name.isEmpty() || group_size.isEmpty())
+                if(group_name.isEmpty())
                 {
                     //Something goes to wrong: All field must be filled
                     //We need to display an error message
@@ -72,7 +76,7 @@ public class Create_GroupActivity extends AppCompatActivity{
                     SimpleDateFormat mdformat = new SimpleDateFormat("yyyy/MM/dd");
                     String strdate = mdformat.format(calendar.getTime());
 
-                    CreateGroup createGroup = new CreateGroup(group_name,group_size,strdate);
+                    CreateGroup createGroup = new CreateGroup(group_name,strdate);
 
                     addGroup(createGroup);
 
@@ -83,9 +87,8 @@ public class Create_GroupActivity extends AppCompatActivity{
     }
 
     private void addGroup(CreateGroup createGroup) {
-        final String groupSize = rg_group_size.getText().toString();
         final String groupName = rg_group_name.getText().toString();
-        reference = mDatabase.getReference("Groups").push();
+        reference = mDatabase.getReference().child("Groups").push();
         //Get Group unique id and update group key
         final String key = reference.getKey();
         createGroup.setGroup_key(key);
@@ -95,8 +98,10 @@ public class Create_GroupActivity extends AppCompatActivity{
             @Override
             public void onSuccess(Void aVoid) {
 
-                Intent i = new Intent(Create_GroupActivity.this, Registration_FormActivity.class);
-                i.putExtra("Group_key",key).putExtra("Group_size",groupSize).putExtra("Group_Name",groupName);
+                updateGroupID()
+
+                Intent i = new Intent(Create_GroupActivity.this, GroupRegistration_FormActivity.class);
+                i.putExtra("Group_key",key).putExtra("Group_Name",groupName);
                 startActivity(i);
                 Toast.makeText(Create_GroupActivity.this, "Successfully Inserted", Toast.LENGTH_SHORT).show();
                 loadProgress.setVisibility(View.GONE);

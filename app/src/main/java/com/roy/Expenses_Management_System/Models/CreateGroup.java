@@ -5,28 +5,24 @@ import com.google.firebase.database.ServerValue;
 public class CreateGroup {
 
     private String group_Name;
-    private String group_size;
     private String group_Generated_Date;
     private String group_key;
     private Object timeStamp;
 
 
-    public CreateGroup(String group_Name, String group_size, String group_Generated_Date) {
+    public CreateGroup(String group_Name, String group_Generated_Date) {
         this.group_Name = group_Name;
-        this.group_size = group_size;
         this.group_Generated_Date = group_Generated_Date;
         this.timeStamp = ServerValue.TIMESTAMP;
     }
+
+
 
     public CreateGroup() {
     }
 
     public String getGroup_Name() {
         return group_Name;
-    }
-
-    public String getGroup_size() {
-        return group_size;
     }
 
     public String getGroup_Generated_Date() {
@@ -43,10 +39,6 @@ public class CreateGroup {
 
     public void setGroup_Name(String group_Name) {
         this.group_Name = group_Name;
-    }
-
-    public void setGroup_size(String group_size) {
-        this.group_size = group_size;
     }
 
     public void setGroup_Generated_Date(String group_Generated_Date) {

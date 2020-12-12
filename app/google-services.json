@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "873871389411",
+    "firebase_url": "https://db-ems-default-rtdb.firebaseio.com",
+    "project_id": "db-ems",
+    "storage_bucket": "db-ems.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:873871389411:android:26a7a8c64c502c3457cbd6",
+        "android_client_info": {
+          "package_name": "com.roy.Expenses_Management_System"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "873871389411-3llqm3u20q353834vc7j5ktstl7kin1i.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBpcd_9OjRW0ls5nJOU0avLcXEzUN5PX84"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "873871389411-3llqm3u20q353834vc7j5ktstl7kin1i.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

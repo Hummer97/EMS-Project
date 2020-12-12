@@ -10,6 +10,7 @@ import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -30,6 +31,7 @@ public class Login_pageActivity extends AppCompatActivity {
     private Button mlogin_btn;
     private EditText mlogin_UserField;
     private EditText mlogin_PasswordField;
+    private TextView mSignUp;
     private FirebaseAuth mAuth;
     private DatabaseReference mDatabase;
     private ProgressDialog mProgressDialog;
@@ -46,11 +48,20 @@ public class Login_pageActivity extends AppCompatActivity {
         mlogin_btn = (Button) findViewById(R.id.lg_btn);
         mlogin_UserField = (EditText) findViewById(R.id.lg_userId);
         mlogin_PasswordField = (EditText) findViewById(R.id.lg_password);
+        mSignUp = (TextView) findViewById(R.id.lg_signUp_btn);
         mProgressDialog = new ProgressDialog(Login_pageActivity.this);
         mlogin_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 checkLogin();
+            }
+        });
+
+        mSignUp.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Login_pageActivity.this,User_RegistrationActivity.class);
+                startActivity(intent);
             }
         });
     }

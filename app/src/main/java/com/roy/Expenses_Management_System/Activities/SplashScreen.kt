@@ -16,7 +16,7 @@ class SplashScreen : AppCompatActivity() {
 
         /* New Handler to start the Menu-Activity
          * and close this Splash-Screen after some seconds.*/Handler().postDelayed(Runnable { /* Create an Intent that will start the Menu-Activity. */
-            val mainIntent = Intent(this@SplashScreen, MainActivity::class.java)
+            val mainIntent = Intent(this@SplashScreen, Login_pageActivity::class.java)
             this@SplashScreen.startActivity(mainIntent)
             this@SplashScreen.finish()
         }, 2000)

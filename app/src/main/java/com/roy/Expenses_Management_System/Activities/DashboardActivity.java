@@ -212,6 +212,10 @@ public class DashboardActivity extends AppCompatActivity implements NavigationVi
                 Intent profile_intent = new Intent(DashboardActivity.this, ProfileActivity.class);
                 startActivity(profile_intent);
                 break;
+            case R.id.nav_group_create_btn:
+                Intent groupCreation_intent = new Intent(DashboardActivity.this,Create_GroupActivity.class);
+                startActivity(groupCreation_intent);
+                break;
             case R.id.nav_logOnt:
                 logOut();
                 break;

@@ -22,6 +22,18 @@
             android:title="Notification"
             android:icon="@mipmap/group_icon"/>
     </group>
+    <item
+        android:title="Groups">
+
+        <menu>
+            <group android:checkableBehavior="single">
+                <item
+                    android:id="@+id/nav_group_create_btn"
+                    android:icon="@drawable/ic_baseline_add"
+                    android:title="Create Group" />
+            </group>
+        </menu>
+    </item>
         <item
 
             android:title="Profile">
